@@ -34,3 +34,4 @@ Each script solves a specific task.
 
 bash_scripts/
 ├── alias-creator/ # Создание алиасов (.bashrc или .zshrc) | Create aliases (.bashrc or .zshrc)
+├── gotify_for_proxmox/ # Отправка уведомлений в Gotify об успешном запуске Proxmox | Sending notifications to Gotify about successful Proxmox startup
