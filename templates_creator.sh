@@ -8,7 +8,7 @@ files_prog=("assembly.asm" "c++.cpp" "golang.go" "nim.nim" "perlModule.pm" "ruby
 files_text=("document.odt" "plaintext.txt" "presentation.odp" "spreadsheet.ods")
 files_web=("css.css" "html.html" "javascript.js" "php.php" "xml.xml")
 
-# Создание функции создание папок или файлов
+# Функция для создание папок или файлов
 # Параметры:
 ### $1 - d-директория, f-файл.
 ### $2 - адрес/название
@@ -40,8 +40,10 @@ create_item() {
 	fi
 }
 
-# Создание папок prog, text, web в директории Templates
-create() {
+# Построение структуры
+# $1 - Папки
+# $2 - Файлы
+building_structure() {
 	for folder in $1; do
 		if [[ ! -d $folder ]]; then
 			create_item "d" "$folder" && create "$1" "$2"
