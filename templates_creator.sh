@@ -47,9 +47,16 @@ create() {
 			create_item "d" "$folder" && create "$1" "$2"
 		elif [[ -d $folder ]]; then
 			for file in $2; do
-				echo "$file"
+				if [[ ! -f $file ]]; then
+					create_item "f" "${folder}/${file}"
+				elif [[ -f $file ]]; then
+					echo "Файл $file уже существует"
+				else
+					echo "Ошибка на этапе создания файла \"$file\""
+				fi
 			done
-
+		else
+			echo "Ошибка на этапе создания папки \"$folder\""
 		fi
 	done
 }
