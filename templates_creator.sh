@@ -8,14 +8,10 @@ files_prog=("assembly.asm" "c++.cpp" "golang.go" "nim.nim" "perlModule.pm" "ruby
 files_text=("document.odt" "plaintext.txt" "presentation.odp" "spreadsheet.ods")
 files_web=("css.css" "html.html" "javascript.js" "php.php" "xml.xml")
 
-err="Error"
-
-# 1. Проверка существование папки Templates и её прав.
-#   1. Если нет, создать и присвоить права и запустить функцию проверки
-#   2. Если есть, проверить права
-#     1. Если права отсутствую, присвоить и запустить функцию занова
-#     2. Если есть, заупустить функцию проверки
-
+# Создание функции создание папок или файлов
+# Параметры:
+### $1 - d-директория, f-файл.
+### $2 - адрес/название
 create_item() {
 	if [[ $1 = "d" ]]; then
 		if [[ ! -d $2 ]]; then
@@ -44,4 +40,19 @@ create_item() {
 	fi
 }
 
+# Создание папок prog, text, web в директории Templates
+create() {
+	for folder in $1; do
+		if [[ ! -d $folder ]]; then
+			create_item "d" "$folder" && create "$1" "$2"
+		elif [[ -d $folder ]]; then
+			for file in $2; do
+				echo "$file"
+			done
+
+		fi
+	done
+}
+
+# Создание папки Templates в родительской директории
 create_item "d" "${dir_templates}"
